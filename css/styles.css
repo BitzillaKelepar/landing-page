@@ -10,7 +10,6 @@
 
 
 /* ---- Base Rules ---- */
-
 html {
     scroll-behavior: smooth;
     scroll-padding: 4em;
@@ -107,8 +106,9 @@ section {
 }
 
 .link__active {
-    background: #333;
+    background: #551685;
     color: #fff !important;
+    border-radius: 8px;
 }
 
 /* Header Styles */

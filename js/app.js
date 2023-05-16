@@ -55,21 +55,27 @@ function createMenu() {
         const sectionName = section.getAttribute("data-nav");
         const sectionId = section.getAttribute("id");
         const navItem = document.createElement("li");
-        navItem.innerHTML = `<a class="menu__link" href="#${sectionId}">${sectionName}</a>`;
+        navItem.innerHTML = `<a class="menu__link" id="menu__link__${sectionId}" href="#${sectionId}">${sectionName}</a>`;
         menu.appendChild(navItem);
     }
 }
 
-// Add class 'active' to section when it is near top of viewport
-// Make section active and remove active
-function makeSectionActive() {
+// Add class 'active' to section and corresponding menu link when it is near top of viewport
+function makeActive() {
     for (section of sections) {
-        if (isInViewport(section) && isActive(section) === false) {
+        if (isInViewport(section) && !isActive(section)) {
             section.classList.add("active");
-            //TODO: change menu__link to active state
-        } else if (isInViewport(section) === false && isActive(section)) {
+            // Change menu__link to active state
+            const sectionId = section.getAttribute("id");
+            const menuLink = document.getElementById(`menu__link__${sectionId}`);
+            menuLink.classList.add("link__active");
+            
+        } else if (!isInViewport(section) && isActive(section)) {
             section.classList.remove("active");
-            //TODO: remove active state from menu__link
+            // Remove active state from menu__link
+            const sectionId = section.getAttribute("id");
+            const menuLink = document.getElementById(`menu__link__${sectionId}`);
+            menuLink.classList.remove("link__active");
         }
     }
 }
@@ -84,7 +90,6 @@ function makeSectionActive() {
 createMenu();
 
 // Scroll smoothly to section on link click
-// TODO: solve non-working smooth-scrolling
 const anchor = document.querySelectorAll('a[href^="#"]');
 anchor.forEach(anchor => {
     anchor.addEventListener("click", function (e) {
@@ -97,7 +102,7 @@ anchor.forEach(anchor => {
 });
 
 // Set sections as active
-document.addEventListener("scroll", makeSectionActive);
+document.addEventListener("scroll", makeActive);
 
 
 
