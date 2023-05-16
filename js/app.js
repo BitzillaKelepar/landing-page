@@ -66,8 +66,10 @@ function makeSectionActive() {
     for (section of sections) {
         if (isInViewport(section) && isActive(section) === false) {
             section.classList.add("active");
+            //TODO: change menu__link to active state
         } else if (isInViewport(section) === false && isActive(section)) {
             section.classList.remove("active");
+            //TODO: remove active state from menu__link
         }
     }
 }
@@ -82,6 +84,7 @@ function makeSectionActive() {
 createMenu();
 
 // Scroll smoothly to section on link click
+// TODO: solve non-working smooth-scrolling
 const anchor = document.querySelectorAll('a[href^="#"]');
 anchor.forEach(anchor => {
     anchor.addEventListener("click", function (e) {
